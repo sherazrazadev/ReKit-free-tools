@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ReKit (`reversed/`)
 
-## Getting Started
+Inspired rebuild of the public [iusetools.site](https://www.iusetools.site/) product shape.
 
-First, run the development server:
+**Stack:** Next.js 16 + TypeScript + Tailwind 4 (same class of stack as the target: Next/React).  
+**Brand:** ReKit (not iUseTools). Own code — see `docs/evidence/RECON.md`.
+
+## Run
 
 ```bash
+cd /Users/dev/Documents/self/website/reversed
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Cloudflare Pages (static export)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build          # writes ./out
+npm run preview        # local check of ./out
+```
 
-## Learn More
+Cloudflare build settings: command `npx next build`, output directory `out`.
 
-To learn more about Next.js, take a look at the following resources:
+## What was reversed
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Captured | Rebuilt |
+| --- | --- |
+| Flat routes (`/jpg-to-word`, `/pdf-merge`, …) | Same slugs |
+| Categories + 30 tools | All listed + working client UIs |
+| Outfit + Inter, dark hero, tool cards, theme toggle | Matched in CSS |
+| Privacy / no-upload pitch | Client-side tools |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Limits (honest)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- PDF text extract: lightweight operator scrape (not full PDF.js text layer)
+- PDF → images: page stubs unless you add pdf.js raster later
+- OCR: Tesseract.js (English default; extend languages as needed)
+- REA CDP against external Chrome failed this session; Cursor browser CDP + HTML fetch used instead
