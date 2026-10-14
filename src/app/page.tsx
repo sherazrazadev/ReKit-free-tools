@@ -1,103 +1,157 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ToolCard } from "@/components/ToolCard";
+import {
+  BRAND,
+  CATEGORIES,
+  TOOLS,
+  toolsByCategory,
+  type ToolCategory,
+} from "@/lib/tools";
 
-export default function Home() {
+const order: ToolCategory[] = ["image", "pdf", "text", "utility"];
+
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      <section className="hero-glow relative overflow-hidden text-white">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
+          <p className="animate-rise text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
+            100% Free · No Signup · {TOOLS.length}+ Tools · Browser-Based
+          </p>
+          <h1 className="animate-rise-delay mt-4 max-w-3xl font-display text-4xl font-extrabold leading-tight md:text-6xl">
+            {BRAND.tagline}
+          </h1>
+          <p className="animate-rise-delay-2 mt-5 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
+            {BRAND.description}
+          </p>
+          <div className="animate-rise-delay-2 mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/tools"
+              className="rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-900"
+            >
+              Explore All Tools
+            </Link>
+            <Link
+              href="/jpg-to-word"
+              className="rounded-full border border-white/30 bg-white/10 px-5 py-3 text-sm font-semibold backdrop-blur"
+            >
+              Try JPG to Word
+            </Link>
+          </div>
+          <div className="mt-12 grid max-w-xl grid-cols-3 gap-4">
+            {[
+              [`${TOOLS.length}+`, "Free Tools"],
+              ["100+", "Languages"],
+              ["100%", "Private"],
+            ].map(([n, l]) => (
+              <div key={l}>
+                <div className="font-display text-3xl font-extrabold">{n}</div>
+                <div className="text-sm text-white/70">{l}</div>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      <section id="all-tools" className="mx-auto max-w-6xl px-4 py-16">
+        <p className="text-sm font-semibold uppercase tracking-wider text-[var(--accent)]">
+          All {TOOLS.length}+ Free Tools
+        </p>
+        <h2 className="mt-2 font-display text-3xl font-extrabold text-[var(--ink)] md:text-4xl">
+          Everything You Need — Right Here
+        </h2>
+        <p className="mt-3 max-w-2xl text-[var(--muted-ink)]">
+          No account needed. No file size tricks. No hidden paywall. Pick a tool
+          and start converting in seconds.
+        </p>
+
+        <div className="mt-12 space-y-14">
+          {order.map((cat) => (
+            <div key={cat}>
+              <h3 className="font-display text-2xl font-bold text-[var(--ink)]">
+                {CATEGORIES[cat].label} ({toolsByCategory(cat).length})
+              </h3>
+              <p className="mt-1 text-sm text-[var(--muted-ink)]">
+                {CATEGORIES[cat].blurb}
+              </p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {toolsByCategory(cat).map((tool) => (
+                  <ToolCard key={tool.slug} tool={tool} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-y border-[var(--border)] bg-[var(--surface)] py-16">
+        <div className="mx-auto max-w-6xl px-4">
+          <p className="text-sm font-semibold uppercase tracking-wider text-[var(--accent)]">
+            How It Works
+          </p>
+          <h2 className="mt-2 font-display text-3xl font-extrabold">
+            Three Steps. That&apos;s It.
+          </h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {[
+              ["01", "Open a Tool", "Choose any free tool. No account required."],
+              ["02", "Upload or Paste", "Drop a file, paste, or type directly."],
+              ["03", "Convert & Download", "Everything stays in your browser."],
+            ].map(([n, t, d]) => (
+              <div key={n} className="rounded-2xl border border-[var(--border)] p-6">
+                <div className="font-display text-sm font-bold text-[var(--accent)]">
+                  Step {n}
+                </div>
+                <h3 className="mt-2 font-display text-xl font-bold">{t}</h3>
+                <p className="mt-2 text-sm text-[var(--muted-ink)]">{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <p className="text-sm font-semibold uppercase tracking-wider text-[var(--accent)]">
+          Why {BRAND.name}
+        </p>
+        <h2 className="mt-2 font-display text-3xl font-extrabold">
+          Built Different. Built for You.
+        </h2>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["100% Private", "Files stay in your browser. Zero server uploads."],
+            ["Instant Results", "Client-side processing delivers results fast."],
+            ["OCR Ready", "Image text extraction runs locally via Tesseract."],
+            ["Always Free", "No hidden tiers, no credit card."],
+          ].map(([t, d]) => (
+            <div
+              key={t}
+              className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5"
+            >
+              <h3 className="font-display text-lg font-bold">{t}</h3>
+              <p className="mt-2 text-sm text-[var(--muted-ink)]">{d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 pb-16">
+        <div className="hero-glow overflow-hidden rounded-3xl px-8 py-12 text-center text-white md:px-16">
+          <h2 className="font-display text-3xl font-extrabold md:text-4xl">
+            Ready to Get Started?
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-white/80">
+            No signup. No waiting. No file uploads to our servers. Just open a
+            tool and start converting.
+          </p>
+          <Link
+            href="/tools"
+            className="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-900"
+          >
+            Browse All {TOOLS.length}+ Tools
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }
