@@ -87,8 +87,8 @@ export const TOOLS: ToolDef[] = [
     name: "Image Converter",
     description: "Convert images between JPG, PNG, WebP, and BMP formats",
     category: "image",
-    inputs: ["JPG", "PNG", "WebP"],
-    outputs: ["JPG", "PNG", "WebP"],
+    inputs: ["JPG", "PNG", "WebP", "BMP"],
+    outputs: ["JPG", "PNG", "WebP", "BMP"],
     accent: "#ef4444",
   },
   {

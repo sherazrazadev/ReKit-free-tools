@@ -81,44 +81,129 @@ export function CaseConverter() {
 }
 
 export function Base64Tool() {
+  const [mode, setMode] = useState<"text" | "file">("text");
   const [text, setText] = useState("");
   const [out, setOut] = useState("");
   const [err, setErr] = useState("");
+  const [fileName, setFileName] = useState("decoded.bin");
+
+  function bytesToBase64(bytes: Uint8Array) {
+    let binary = "";
+    const chunk = 0x8000;
+    for (let i = 0; i < bytes.length; i += chunk) {
+      binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
+    }
+    return btoa(binary);
+  }
+
+  function base64ToBytes(b64: string) {
+    const clean = b64.replace(/\s+/g, "");
+    const binary = atob(clean);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return bytes;
+  }
 
   return (
     <Panel className="space-y-3">
-      <Label>Input</Label>
-      <TextArea value={text} onChange={(e) => setText(e.target.value)} />
-      <div className="flex flex-wrap gap-2">
-        <Button
-          onClick={() => {
-            try {
-              setOut(btoa(unescape(encodeURIComponent(text))));
-              setErr("");
-            } catch {
-              setErr("Encode failed");
-            }
-          }}
-        >
-          Encode
+      <div className="flex gap-2">
+        <Button variant={mode === "text" ? "primary" : "ghost"} onClick={() => setMode("text")}>
+          Text
         </Button>
-        <Button
-          variant="ghost"
-          onClick={() => {
-            try {
-              setOut(decodeURIComponent(escape(atob(text))));
-              setErr("");
-            } catch {
-              setErr("Decode failed — invalid Base64");
-            }
-          }}
-        >
-          Decode
+        <Button variant={mode === "file" ? "primary" : "ghost"} onClick={() => setMode("file")}>
+          File
         </Button>
       </div>
+
+      {mode === "text" ? (
+        <>
+          <Label>Input</Label>
+          <TextArea value={text} onChange={(e) => setText(e.target.value)} />
+          <div className="flex flex-wrap gap-2">
+            <Button
+              onClick={() => {
+                try {
+                  setOut(btoa(unescape(encodeURIComponent(text))));
+                  setErr("");
+                } catch {
+                  setErr("Encode failed");
+                }
+              }}
+            >
+              Encode
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                try {
+                  setOut(decodeURIComponent(escape(atob(text.replace(/\s+/g, "")))));
+                  setErr("");
+                } catch {
+                  setErr("Decode failed — invalid Base64");
+                }
+              }}
+            >
+              Decode
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          <Label>Encode a file to Base64</Label>
+          <Input
+            type="file"
+            onChange={async (e) => {
+              const file = e.target.files?.[0];
+              if (!file) return;
+              try {
+                const bytes = new Uint8Array(await file.arrayBuffer());
+                setOut(bytesToBase64(bytes));
+                setFileName(file.name);
+                setErr("");
+              } catch {
+                setErr("File encode failed");
+              }
+            }}
+          />
+          <Label>Or paste Base64 and download as a file</Label>
+          <TextArea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Paste Base64…"
+            className="font-mono text-xs"
+          />
+          <div className="grid gap-2 sm:grid-cols-[1fr_auto]">
+            <Input
+              value={fileName}
+              onChange={(e) => setFileName(e.target.value)}
+              placeholder="decoded.bin"
+            />
+            <Button
+              onClick={() => {
+                try {
+                  const bytes = base64ToBytes(text || out);
+                  downloadBlob(
+                    new Blob([bytes], { type: "application/octet-stream" }),
+                    fileName || "decoded.bin",
+                  );
+                  setErr("");
+                } catch {
+                  setErr("Decode/download failed — invalid Base64");
+                }
+              }}
+            >
+              Download file
+            </Button>
+          </div>
+        </>
+      )}
+
       <Label>Output</Label>
-      <TextArea value={out} readOnly />
-      {err && <Status>{err}</Status>}
+      <TextArea value={out} readOnly className="font-mono text-xs" />
+      <Button variant="ghost" onClick={() => navigator.clipboard.writeText(out)} disabled={!out}>
+        Copy output
+      </Button>
+      {err && <Status tone="err">{err}</Status>}
     </Panel>
   );
 }
