@@ -1,0 +1,45 @@
+# ReKit (rekit.tools)
+
+> Free, client-side, 100% private file and conversion utilities. All processing runs in the browser with zero server uploads.
+
+## Image Tools
+- /jpg-to-word: Convert image text into an editable Word document (DOCX) using on-device OCR.
+- /image-to-pdf: Merge one or multiple images (JPG, PNG) into a single PDF file.
+- /image-to-text: Extract text from any image using on-device Tesseract.js OCR.
+- /image-resizer: Resize images to any custom pixel dimension or percentage.
+- /image-compressor: Compress images to reduce KB size while preserving visual quality.
+- /image-converter: Convert images between JPG, PNG, WebP, and BMP formats.
+- /image-watermark: Add custom text or image watermarks to photos locally.
+
+## PDF Tools
+- /pdf-to-text: Extract text from PDF files quickly and accurately.
+- /pdf-to-word: Convert PDF documents into editable Word (.docx) files.
+- /pdf-to-images: Convert PDF pages into JPG or PNG images.
+- /pdf-merge: Combine multiple PDF files into one document in browser memory.
+- /pdf-split: Split a PDF into individual pages or custom page ranges.
+
+## Text Tools
+- /text-to-pdf: Convert plain text into a formatted PDF document.
+- /text-to-word: Convert plain text into a formatted Word DOCX file.
+- /text-to-image: Convert text into a downloadable PNG or JPG graphic.
+
+## Developer & Productivity Utilities
+- /word-counter: Count words, characters, sentences, and estimated reading time.
+- /case-converter: Convert text between UPPERCASE, lowercase, Title Case, camelCase, kebab-case.
+- /base64: Encode or decode text and binary files using Base64.
+- /json-formatter: Format, validate, and minify JSON data instantly.
+- /qr-generator: Generate custom QR codes for URLs, contact details, or text.
+- /password-generator: Generate cryptographically strong random passwords.
+- /url-encoder: Encode or decode URL parameters and query strings.
+- /uuid-generator: Generate cryptographically random UUID v4 identifiers.
+- /lorem-ipsum: Generate placeholder dummy text by paragraphs, words, or lists.
+- /hash-generator: Generate cryptographic hash checksums (SHA-1, SHA-256, SHA-384, SHA-512).
+- /color-converter: Convert colors between HEX, RGB, HSL, RGBA, and HSLA formats.
+- /csv-to-json: Convert tabular CSV data into structured JSON objects.
+- /markdown-preview: Live preview of GitHub-flavored Markdown rendered to HTML.
+- /text-diff: Compare two text blocks with added and removed line highlighting.
+- /base-converter: Convert numbers between Binary, Octal, Decimal, and Hexadecimal.
+
+## Blog & Guides
+- /blog: Practical guides and tutorials on client-side conversion, compression, and developer utilities.
+- /blog/convert-jpg-to-word-without-uploading: How to convert JPG to editable Word without uploading files.

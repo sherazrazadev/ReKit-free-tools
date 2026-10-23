@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   output: "export",
   images: { unoptimized: true },
   turbopack: {
-    root: path.join(__dirname),
+    root: path.join(__dirname, ".."),
   },
 };
 
