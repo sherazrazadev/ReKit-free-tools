@@ -17,6 +17,58 @@ export type BlogPost = {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "merge-multiple-pdfs-in-browser-privately",
+    title: "Merge Multiple PDFs Privately in Your Browser",
+    description:
+      "Combine multiple PDF files into one clean document directly in your browser. 100% private, client-side processing with zero server uploads.",
+    date: "2026-10-23",
+    minutes: 5,
+    category: "PDF",
+    toolSlug: "pdf-merge",
+    author: "ReKit Team",
+    content: {
+      problem:
+        "Merging confidential PDF documents—such as bank statements, contracts, tax returns, or medical records—using typical online converter tools creates significant security risks. Most web services silently upload your files to remote cloud servers, store them in temporary directories, and expose your private data to potential breaches. Furthermore, server-side tools often enforce file size limits, daily merge quotas, or mandatory paid subscriptions.",
+      steps: [
+        {
+          title: "Select your PDF files",
+          body: "Drag and drop two or more PDF documents into the ReKit PDF Merger drop zone, or browse from your device. Your files remain inside your local browser memory and are never uploaded.",
+        },
+        {
+          title: "Verify your file order",
+          body: "Ensure your documents are selected in the exact order you want them combined. The merger appends pages sequentially from the first document through to the last.",
+        },
+        {
+          title: "Combine instantly via client-side processing",
+          body: "Click Merge to combine all pages using in-memory PDF streams. The browser's local engine compiles the documents without network latency or server queues.",
+        },
+        {
+          title: "Save your combined PDF",
+          body: "Once processing completes, your merged document downloads automatically as merged.pdf, ready for archiving, printing, or sharing.",
+        },
+      ],
+      tips: [
+        "Ensure none of the source PDF files are password-protected before merging.",
+        "Keep total combined file size within your device's available browser memory (typically up to 50MB-100MB works seamlessly).",
+        "For legal or formal document packages, ensure page numbers and appendices match your target reading order before merging.",
+      ],
+      faq: [
+        {
+          q: "Are my sensitive PDF documents uploaded to your server?",
+          a: "No. All PDF merging happens entirely inside your browser using client-side JavaScript (pdf-lib). No files are sent across the internet or stored on external servers.",
+        },
+        {
+          q: "Is there a limit on how many PDF files I can merge at once?",
+          a: "No. Because processing is performed entirely by your device's browser, there are no artificial quotas, limits, or paywalls.",
+        },
+        {
+          q: "Does merging PDFs degrade page quality or vector text?",
+          a: "No. ReKit performs binary stream page copying, preserving 100% of original vector fonts, high-resolution graphics, and metadata.",
+        },
+      ],
+    },
+  },
+  {
     slug: "convert-jpg-to-word-without-uploading",
     title: "How to Convert JPG to Word Without Uploading",
     description:

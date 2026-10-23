@@ -43,3 +43,5 @@
 ## Blog & Guides
 - /blog: Practical guides and tutorials on client-side conversion, compression, and developer utilities.
 - /blog/convert-jpg-to-word-without-uploading: How to convert JPG to editable Word without uploading files.
+- /blog/merge-multiple-pdfs-in-browser-privately: How to merge multiple PDFs privately in browser memory.
+
